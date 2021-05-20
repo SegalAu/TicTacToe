@@ -16,8 +16,9 @@ Instructions for Running
 
 8) Visit localhost:3000 in browser and play the game!
 
+** [TODO] Add game and receiver execution to docker-compose (single command startup)
 
-================================================================================================
+===============================================================
 
 **Languages Used**
 - Python (Receiver)
