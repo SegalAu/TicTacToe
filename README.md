@@ -4,7 +4,7 @@ Uses Monte Carlo heuristics to play tic tac toe!
 
 Instructions for Running
 1) navigate to project root file (/383-project) and execute `docker-compose build`
-    (estimated time 20-30 seconds)
+    (estimated time 1-2 minutes)
 2) execute `docker-compose up`
     (estimated time 1.5-2 min)
     Wait until react application has started (should link you to localhost:3000)
