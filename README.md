@@ -14,10 +14,14 @@ Instructions for Running
 3) In a **new terminal**, navigate to subfolder /Game
 4) Execute `javac -cp ./py4j0.10.9.1.jar Game.java`
 5) Execute `java -cp ./py4j0.10.9.1.jar Game.java`
-6) In a **new terminal**, navigate to subfolder /MessageQueue
-7) Execute `python receive.py`
+    ![image](https://user-images.githubusercontent.com/9510917/119020055-a57fb900-b952-11eb-9eb9-1175f1da01d5.png)
+    
+7) In a **new terminal**, navigate to subfolder /MessageQueue
+8) Execute `python receive.py`
+    ![image](https://user-images.githubusercontent.com/9510917/119020107-b5979880-b952-11eb-87c8-0a9db4775796.png)
 
 8) Visit localhost:3000 in browser and play the game!
+    
 
 ** [TODO] Add game and receiver execution to docker-compose (single command startup)
 
