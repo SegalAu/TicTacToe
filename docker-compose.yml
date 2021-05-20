@@ -1,0 +1,71 @@
+version: "3"
+services:
+  rabbitmq:
+   hostname: rabbitmq
+   image: rabbitmq:3
+   container_name: rabbitmq
+   environment:
+   - RABBITMQ_DEFAULT_USER=guest
+   - RABBITMQ_DEFAULT_PASS=guest
+   ports:
+     - "127.0.0.1:5672:5672"
+   networks: 
+      - my_network
+
+  # Docker Compose conflict with game and receiver execution
+  # # message_queue:
+  # #   build:
+  # #     context: MessageQueue
+  # #     dockerfile: python.Dockerfile
+  # #   depends_on: 
+  # #     - rabbitmq
+  # #   networks: 
+  # #   - my_network
+
+  # game:
+  #   build:
+  #     context: Game
+  #     dockerfile: java.Dockerfile
+  #   ports:
+  #     - "127.0.0.1:25333:25333"
+  #   expose:
+  #     - "25333"
+  #   # networks: 
+  #   # - my_network
+
+  server:
+    hostname: server
+    build:
+      context: Server
+      dockerfile: js.Dockerfile
+    expose: 
+      - "4001"
+    ports:
+      - "4001:4001"
+    networks: 
+    - my_network
+     
+
+  web_app:
+    stdin_open: true
+    build:
+      context: front_end
+      dockerfile: Dockerfile.dev
+    ports:
+    - "3000:3000"
+    volumes:
+    - "/front_end/app/node_modules"
+    - "./front_end/:/app"
+    depends_on:
+    - server
+    networks: 
+    - my_network
+
+networks:
+  my_network:
+    driver: bridge
+  
+
+  
+
+

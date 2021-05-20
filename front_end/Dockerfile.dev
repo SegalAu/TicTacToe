@@ -1,0 +1,12 @@
+FROM node:14-buster
+
+WORKDIR /app
+
+# install and cache app dependencies
+COPY package.json /app
+
+RUN yarn install
+
+COPY . /app
+
+CMD ["yarn", "run", "start"]
