@@ -43,10 +43,6 @@ public class Game {
       return returnList;
     }
 
-    // find all possible moves
-    // find best move (playouts 2000)
-    // return array
-
     int indexOfMove = determineMove(list);
     System.out.println("getting back index for move!");
     System.out.println(indexOfMove);
@@ -56,13 +52,6 @@ public class Game {
     for (int i = 0; i < testArr.length; i++ ) {
       System.out.print(testArr[i]);
     }
-
-    // int rnd = new Random().nextInt(testArr.length);
-    // int indexFinal = testArr[rnd];
-    // System.out.println("new index!");
-    // System.out.println(rnd);
-    // System.out.println("index to be moved to is:");
-    // System.out.println(indexFinal);
 
     // // Perform move
     list[indexOfMove] = 2;
@@ -156,23 +145,6 @@ public class Game {
       
     }
 
-    // // Choose move with least amount of losses
-    // int cur_min = results_arr[0];
-    // int cur_min_index = 0;
-    // for (int i = 0; i < results_arr.length; i++ ) {
-    //   if (results_arr[i] < cur_min) {
-    //     cur_min = results_arr[i];
-    //     cur_min_index = i;
-    //   }
-    // }
-
-    // Random rand = new Random();
-    // int next_index = rand.nextInt(results_arr.length);
-    // System.out.println("random integer!");
-    // System.out.println(next_index);    
-
-    // return computer_moves[cur_min_index];
-    // Find playout with lowest loss
     int min_loss_ind = 0;
     int min_loss = 1000;
     for (int i = 0; i < loss.length; ++i) {
