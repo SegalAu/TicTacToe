@@ -10,9 +10,9 @@ Instructions for Running
     Wait until react application has started (should link you to localhost:3000)
     ![image](https://user-images.githubusercontent.com/9510917/119019980-926ce900-b952-11eb-962b-f659d19162a7.png)
 
-    *Check that web-app has started correctly, if it fails, might need to perform a npm install within the front end folder
-    *Check that server has required dependencies (navigate to server and run npm install)
-    *Run general npm install (root level) to be safe
+    *Check that web-app has started correctly, if it fails, might need to perform a npm install within the front end folder* <br>
+    *Check that server has required dependencies (navigate to server and run npm install)* <br>
+    *Run general npm install (root level) to be safe* <br>
 3) In a **new terminal**, navigate to subfolder /Game
 4) Execute `javac -cp ./py4j0.10.9.1.jar Game.java`
 5) Execute `java -cp ./py4j0.10.9.1.jar Game.java`
