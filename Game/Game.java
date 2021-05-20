@@ -57,15 +57,15 @@ public class Game {
       System.out.print(testArr[i]);
     }
 
-    int rnd = new Random().nextInt(testArr.length);
-    int indexFinal = testArr[rnd];
-    System.out.println("new index!");
-    System.out.println(rnd);
-    System.out.println("index to be moved to is:");
-    System.out.println(indexFinal);
+    // int rnd = new Random().nextInt(testArr.length);
+    // int indexFinal = testArr[rnd];
+    // System.out.println("new index!");
+    // System.out.println(rnd);
+    // System.out.println("index to be moved to is:");
+    // System.out.println(indexFinal);
 
-    // Perform move
-    list[indexFinal] = 2;
+    // // Perform move
+    list[indexOfMove] = 2;
 
     if(checkGameResult(list) == 3) {
       int[] returnList = {5, 5, 5, 5, 5, 5, 5, 5, 5};
@@ -114,61 +114,78 @@ public class Game {
     return checkGameResult(temp_game_state);
   }
 
-  public int determineMove(int[] list) {
+  public int determineMove(int[] game_arr) {
     // Create list of all legal moves
-    int[] computer_moves = getAllMoves(list);
-
+    int[] computer_moves = getAllMoves(game_arr);
+    int moves_size = computer_moves.length;
     // Create 2d array to store results
-    int[] results_arr = new int[computer_moves.length];
-
-    Arrays.fill(results_arr, 0);
-
-
-    // List<Integer> results_arr = new ArrayList<Integer>(Collections.nCopies(computer_moves.length, 0));
-
-
+    int[] wins = new int[moves_size];
+    int[] loss = new int[moves_size];
+    int[] ties = new int[moves_size];
+    Arrays.fill(wins, 0);
+    Arrays.fill(loss, 0);
+    Arrays.fill(ties, 0);
+    int curr_wins = 0;
+    int curr_loss = 0;
+    int curr_ties = 0;
     int result;
     int returnVal;
 
     // simulate playout of each move
-    for (int i = 0; i < computer_moves.length; i++) {
-
-      for (int j = 0; j < 1000; j++) {
-        
-        int[] temp_game_state = list.clone();
+    for (int i = 0; i < computer_moves.length; ++i) {
+      curr_wins = 0;
+      curr_loss = 0;
+      curr_ties = 0;
+      for (int j = 0; j < 1000; ++j) {        
+        int[] temp_game_state = game_arr.clone();
         temp_game_state[computer_moves[i]] = 2;
-
         result = simulatePlayout(temp_game_state, "Human");
 
         if (result == 1) {
-          results_arr[i] += 1; // human wins
-        } 
+          curr_ties += 1; 
+        } else if (result == 2) {
+          curr_loss += 1;
+        } else {
+          curr_wins += 1;
+        }
       }
-      // Record number of wins / losses / ties for each possible move
-      // ties[i] = results_arr[i][0];
-      // loss.set(i,results_arr[i][1]);
-      System.out.println("simulation!");
-      System.out.println(results_arr[0]);
-      System.out.println(results_arr[1]);
-      // wins[i] = results_arr[i][2]; 
+
+      wins[i] = curr_wins;
+      loss[i] = curr_loss;
+      ties[i] = curr_ties;
+      
     }
 
-    // Choose move with least amount of losses
-    int cur_min = results_arr[0];
-    int cur_min_index = 0;
-    for (int i = 0; i < results_arr.length; i++ ) {
-      if (results_arr[i] < cur_min) {
-        cur_min = results_arr[i];
-        cur_min_index = i;
+    // // Choose move with least amount of losses
+    // int cur_min = results_arr[0];
+    // int cur_min_index = 0;
+    // for (int i = 0; i < results_arr.length; i++ ) {
+    //   if (results_arr[i] < cur_min) {
+    //     cur_min = results_arr[i];
+    //     cur_min_index = i;
+    //   }
+    // }
+
+    // Random rand = new Random();
+    // int next_index = rand.nextInt(results_arr.length);
+    // System.out.println("random integer!");
+    // System.out.println(next_index);    
+
+    // return computer_moves[cur_min_index];
+    // Find playout with lowest loss
+    int min_loss_ind = 0;
+    int min_loss = 1000;
+    for (int i = 0; i < loss.length; ++i) {
+      if (loss[i] < min_loss) {
+        min_loss = loss[i];
+        min_loss_ind = i;
       }
     }
 
-    Random rand = new Random();
-    int next_index = rand.nextInt(results_arr.length);
-    System.out.println("random integer!");
-    System.out.println(next_index);    
+    System.out.println("Index with least losses");
+    System.out.println("index: " + min_loss_ind);
 
-    return computer_moves[cur_min_index];
+    return computer_moves[min_loss_ind];
   }
 
   // return indexes of all possible moves
